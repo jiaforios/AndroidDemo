@@ -1,5 +1,6 @@
 package airmonitor.com.androiddemo;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,10 +30,16 @@ public class MainActivity extends AppCompatActivity {
             String name = "小花";
             tf1.setText(name);
             Toast.makeText(MainActivity.this,"登录按钮的点击事件",Toast.LENGTH_LONG).show();
-            Log.v(TAG, "playAction: 打印事件");
-
+            Log.v(TAG, "playAction: 打印登录事件");
+            MainActivity.this.pushAction();
         }
     };
 
+    // 跳转界面
+    private void pushAction(){
+        Intent intent = new Intent();
+        intent.setClass(MainActivity.this,ListActivity.class);
+        MainActivity.this.startActivity(intent);
+    }
 
 }
