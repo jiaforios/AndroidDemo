@@ -1,7 +1,12 @@
 package airmonitor.com.androiddemo;
 
+import android.content.Intent;
+import android.nfc.Tag;
+import android.support.annotation.DrawableRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.view.View;
@@ -9,14 +14,18 @@ import android.widget.ListAdapter;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.view.LayoutInflater;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.content.Context;
+import android.graphics.Color;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ListActivity extends AppCompatActivity {
 
-    private List dataSource = new ArrayList();
+    public  static  final String TAG = "ListActivity";
      ListView list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +34,49 @@ public class ListActivity extends AppCompatActivity {
         Button back = (Button) findViewById(R.id.backid);
         back.setOnClickListener(backAction);
 
-        setInfo();
         list = (ListView) findViewById(R.id.listview);
-        list.setAdapter(new ListViewAdapter(dataSource));
+        //组织数据源
+        List<HashMap<String, String>> mylist = new ArrayList<HashMap<String, String>>();
+        final List<String> dataSource = new ArrayList<String>();
+        dataSource.add("音乐");
+        dataSource.add("视频");
+        dataSource.add("图片");
+        dataSource.add("数据库");
+        dataSource.add("网络");
+        dataSource.add("本地存储");
+        dataSource.add("传值");
+        dataSource.add("通知");
+        dataSource.add("照相机");
+        dataSource.add("相册");
+
+        for(int i=0;i<10;i++) {
+            HashMap<String, String> map = new HashMap<String, String>();
+            map.put("itemTitle", dataSource.get(i));
+            mylist.add(map);
+        }
+        //配置适配器
+        SimpleAdapter adapter = new SimpleAdapter(this,
+                mylist,//数据源
+                R.layout.item,//显示布局
+                new String[] {"itemTitle"}, //数据源的属性字段
+                new int[] {R.id.title}); //布局里的控件id
+        //添加并且显示
+        list.setAdapter(adapter);
+
+
+       list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+           @Override
+           public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+               Log.v(TAG, "点击"+dataSource.get(i));
+
+               if (i == 5){ // 本地存储
+                   Intent intent = new Intent();
+                   intent.setClass(ListActivity.this,PrefrenceStore.class);
+                   ListActivity.this.startActivity(intent);
+               }
+
+           }
+       });
 
     }
 
@@ -37,60 +86,6 @@ public class ListActivity extends AppCompatActivity {
             finish();
         }
     };
-    public class ListViewAdapter extends BaseAdapter {
-        View[] itemViews;
-
-        public ListViewAdapter(List mlistInfo) {
-            // TODO Auto-generated constructor stub
-            itemViews = new View[mlistInfo.size()];
-            for(int i=0;i<mlistInfo.size();i++){
-                String getInfo=(String) mlistInfo.get(i);    //获取第i个对象
-                //调用makeItemView，实例化一个Item
-                itemViews[i] = makeItemView();
-            }
-        }
-
-        public int getCount() {
-            return itemViews.length;
-        }
-
-        public View getItem(int position) {
-            return itemViews[position];
-        }
-
-        public long getItemId(int position) {
-            return position;
-        }
-
-        //绘制Item的函数
-        private View makeItemView() {
-            LayoutInflater inflater = (LayoutInflater) ListActivity.this
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            // 使用View的对象itemView与R.layout.item关联
-            View itemView = inflater.inflate(R.layout.item, null);
-            // 通过findViewById()方法实例R.layout.item内各组件
-            TextView title = (TextView) itemView.findViewById(R.id.title);
-            title.setText("1111");    //填入相应的值
-            TextView text = (TextView) itemView.findViewById(R.id.info);
-            text.setText("22222");
-
-            return itemView;
-        }
 
 
-        public View getView(int position, View convertView, ViewGroup parent) {
-            if (convertView == null)
-                return itemViews[position];
-            return convertView;
-        }
-    }
-
-    public  void setInfo(){
-        dataSource.clear();
-        int i = 0;
-        while (i<10){
-            dataSource.add("row"+i);
-            i++;
-        }
-    }
 }

@@ -4,4 +4,10 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="testColor">#487aed</color>>
+    <color name="blackrColor">#4A4A4A</color>>
+    <color name="bluerColor">#DB7F5A</color>>
+    <color name="redrColor">#F60045</color>>
+    <color name="whiterColor">#FFFFFF</color>>
+
+
 </resources>

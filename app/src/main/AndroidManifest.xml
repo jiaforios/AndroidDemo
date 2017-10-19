@@ -15,7 +15,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ListActivity"></activity>
+        <activity android:name=".ListActivity" />
+
+        <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+        <activity android:name=".PrefrenceStore"></activity>
     </application>
 
 </manifest>
