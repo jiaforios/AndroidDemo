@@ -80,6 +80,11 @@ public class ListActivity extends AppCompatActivity {
                    intent.setClass(ListActivity.this,NetTestActivity.class);
                    ListActivity.this.startActivity(intent);
                }
+               if (i== 8){
+                   Intent camera = new Intent();
+                   camera.setClass(ListActivity.this,CameraActivity.class);
+                   ListActivity.this.startActivity(camera);
+               }
 
            }
        });

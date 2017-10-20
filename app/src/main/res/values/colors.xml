@@ -7,7 +7,9 @@
     <color name="blackrColor">#4A4A4A</color>>
     <color name="bluerColor">#DB7F5A</color>>
     <color name="redrColor">#F60045</color>>
-    <color name="whiterColor">#FFFFFF</color>>
+    <color name="whiterColor">#FFFFFF</color>
+
+    <color name="black_overlay">#66000000</color>>
 
 
 </resources>

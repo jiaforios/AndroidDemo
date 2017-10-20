@@ -75,7 +75,7 @@ public class NetTestActivity extends AppCompatActivity {
                              });
                         }
                     }
-                    
+
                 });
             }
         });
