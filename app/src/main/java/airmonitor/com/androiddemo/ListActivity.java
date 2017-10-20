@@ -75,6 +75,12 @@ public class ListActivity extends AppCompatActivity {
                    ListActivity.this.startActivity(intent);
                }
 
+               if (i==4){
+                   Intent intent = new Intent();
+                   intent.setClass(ListActivity.this,NetTestActivity.class);
+                   ListActivity.this.startActivity(intent);
+               }
+
            }
        });
 
